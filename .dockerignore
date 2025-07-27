@@ -1,0 +1,13 @@
+# Maven build directory
+target/
+
+# IDE configs
+.idea/
+*.iml
+
+# OS-specific
+.DS_Store
+
+# Logs or temporary files
+*.log
+*.class
