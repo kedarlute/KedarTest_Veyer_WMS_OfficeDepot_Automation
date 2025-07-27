@@ -1,0 +1,43 @@
+package tests;
+
+import base.BaseTest;
+import com.aventstack.extentreports.Status;
+import constants.Constants;
+import listeners.RetryAnalyzer;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
+import org.testng.Assert;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import utils.DriverManager;
+
+public class LoginTest extends BaseTest {
+
+        @Test(retryAnalyzer = RetryAnalyzer.class)
+        public void testOfficeDepotTitle() {
+            test = extent.createTest("OfficeDepot Title Test");
+            WebDriver driver = DriverManager.getDriver();
+            driver.get(Constants.BASE_URL);
+            String title = driver.getTitle();
+            test.info("Title is: " + title);
+            test.log(Status.INFO, "Launching browser");
+
+
+         Assert.assertEquals(driver.getTitle(),"Office Depot OfficeMax | Official Online Store");
+            test.log(Status.PASS, "Title verified successfully");
+
+            test.pass("Step Passed",
+                    MediaEntityBuilder.createScreenCaptureFromPath("screenshot.png").build());
+
+
+          /*
+          if (title.contains("Office Depot OfficeMax")) {
+                test.pass("Title of Home Page  verified successfully");
+            } else {
+                test.fail("Title of Home Page does not match");
+            }
+
+           */
+        }
+    }
+
+
