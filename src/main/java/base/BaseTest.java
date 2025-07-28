@@ -38,11 +38,11 @@ public class BaseTest {
 
             WebDriverManager.chromedriver().setup();
             WebDriver driver = new ChromeDriver();
-            //DriverManager.setDriver(driver); // Set to ThreadLocal
+            DriverManager.setDriver(driver); // Set to ThreadLocal
         // Selenium Grid on Azure Cloud
-        ChromeOptions options = new ChromeOptions();
-        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
-        driver.manage().window().maximize();
+        //ChromeOptions options = new ChromeOptions();
+        //driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+        //driver.manage().window().maximize();
 
     }
 
