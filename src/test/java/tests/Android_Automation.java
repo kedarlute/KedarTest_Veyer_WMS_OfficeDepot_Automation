@@ -1,5 +1,5 @@
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.MobileElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -29,10 +29,10 @@ public class Android_Automation {
     @Test
     public void advertiseTest() {
 
-        WebElement nextElem = androidDriver.findElementByAccessibilityId("Next");
+        MobileElement nextElem = androidDriver.findElementByAccessibilityId("Next");
         nextElem.click();
         nextElem.click();
-        WebElement doneElem = androidDriver.findElementById("com.google.android.apps.docs:id/done");
+        MobileElement doneElem = androidDriver.findElementById("com.google.android.apps.docs:id/done");
         doneElem.click();
 
     }
