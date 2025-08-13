@@ -18,7 +18,7 @@ public class Android_Automation {
         capabilities.setCapability("deviceName", "emulator-5554");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("platformVersion", "7.0");
-        capabilities.setCapability("app", "/Users/shanliu/TW/QA/Mobile/AppiumDemo/src/test/apps/huobi-0.apk");
+        capabilities.setCapability("app", "/Users/kedarl/QA/Mobile/Appium/src/test/apps/hu.apk");
         capabilities.setCapability("automationName", "uiautomator2");
         capabilities.setCapability("fullReset", true);
 
