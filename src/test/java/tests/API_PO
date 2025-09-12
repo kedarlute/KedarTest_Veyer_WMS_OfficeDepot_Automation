@@ -1,1 +1,59 @@
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import static io.restassured.RestAssured.*;
+
+public class POApiUiTest {
+    WebDriver driver;
+    String poNumber = "PO" + System.currentTimeMillis(); // unique PO
+
+   
+
+    @Test(priority = 1)
+    public void createPOApiTest() {
+        // Create PO using RestAssured
+        String requestBody = "{\n" +
+                "  \"poNumber\": \"" + poNumber + "\",\n" +
+                "  \"vendor\": \"ABC Supplier\",\n" +
+                "  \"items\": [\n" +
+                "    {\"itemCode\": \"ITEM001\", \"quantity\": 100}\n" +
+                "  ]\n" +
+                "}";
+
+        Response response = given()
+                .header("Content-Type", "application/json")
+                .body(requestBody)
+                .when()
+                .post("/api/inbound/purchaseOrders")
+                .then()
+                .statusCode(201)
+                .extract().response();
+
+        Assert.assertEquals(response.jsonPath().getString("poNumber"), poNumber, "PO number mismatch in API response!");
+    }
+
+    @Test(priority = 2, dependsOnMethods = "createPOApiTest")
+    public void verifyPOInUi() {
+        // Navigate to PO List in UI
+        driver.findElement(By.id("menu_inbound")).click();
+        driver.findElement(By.id("viewPOList")).click();
+        driver.findElement(By.id("searchPO")).sendKeys(poNumber);
+        driver.findElement(By.id("searchBtn")).click();
+
+        // Verify PO in UI
+        WebElement result = driver.findElement(By.xpath("//td[contains(text(),'" + poNumber + "')]"));
+        Assert.assertTrue(result.isDisplayed(), "PO not found in UI after API creation!");
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}
 
