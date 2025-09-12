@@ -1,0 +1,47 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+public class InboundTests {
+    WebDriver driver;
+
+    @BeforeClass
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("http://wms-demo-url.com/login");
+    }
+
+    @Test(priority = 1)
+    public void loginTest() {
+        driver.findElement(By.id("username")).sendKeys("admin");
+        driver.findElement(By.id("password")).sendKeys("password123");
+        driver.findElement(By.id("loginBtn")).click();
+
+        WebElement dashboard = driver.findElement(By.id("welcomeMsg"));
+        Assert.assertTrue(dashboard.isDisplayed(), "Login failed!");
+    }
+
+    @Test(priority = 2, dependsOnMethods = "loginTest")
+    public void createPurchaseOrder() {
+        driver.findElement(By.id("menu_inbound")).click();
+        driver.findElement(By.id("createPO")).click();
+
+        driver.findElement(By.id("poNumber")).sendKeys("PO12345");
+        driver.findElement(By.id("vendorName")).sendKeys("ABC Supplier");
+        driver.findElement(By.id("itemCode")).sendKeys("ITEM001");
+        driver.findElement(By.id("quantity")).sendKeys("100");
+        driver.findElement(By.id("savePO")).click();
+
+        WebElement confirmation = driver.findElement(By.xpath("//div[contains(text(),'PO Created Successfully')]"));
+        Assert.assertTrue(confirmation.isDisplayed(), "PO creation failed!");
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}
