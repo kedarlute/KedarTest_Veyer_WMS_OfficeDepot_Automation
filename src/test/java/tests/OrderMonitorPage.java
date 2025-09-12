@@ -1,5 +1,12 @@
-package pages;
+package tests;
 
+/**
+ * @author: Kedarnath Lute
+ */
+
+import base.BaseTest;
+import com.aventstack.extentreports.Status;
+import constants.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
