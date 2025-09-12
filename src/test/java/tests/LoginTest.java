@@ -16,6 +16,17 @@ import utils.DriverManager;
 
 public class LoginTest extends BaseTest {
 
+
+        @Test(priority = 1)
+    public void loginTest() {
+        driver.findElement(By.id("username")).sendKeys("admin");
+        driver.findElement(By.id("password")).sendKeys("password123");
+        driver.findElement(By.id("loginBtn")).click();
+
+        WebElement dashboard = driver.findElement(By.id("welcomeMsg"));
+        Assert.assertTrue(dashboard.isDisplayed(), "Login failed!");
+    }
+        
         @Test(retryAnalyzer = RetryAnalyzer.class)
         public void testOfficeDepotTitle() {
             test = extent.createTest("VEYER by Office Depot Title Test");
