@@ -16,7 +16,7 @@ pipeline {
     steps {
         script {
             def action = sh(
-                script: "java SelfHealingEngine prediction.txt",
+                script: "java AISelfHealingEngine prediction.txt",
                 returnStdout: true
             ).trim()
 
