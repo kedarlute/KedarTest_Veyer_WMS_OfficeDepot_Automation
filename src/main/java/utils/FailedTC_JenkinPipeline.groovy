@@ -4,9 +4,7 @@ pipeline {
     stages {
         stage('Build and Run Initial Tests') {
             steps {
-                // Assuming a Maven project, clean and install, allowing test failures to generate testng-failed.xml
                 // -Dmaven.test.failure.ignore=true allows the build to continue even if tests fail,
-                // which is necessary for testng-failed.xml to be generated.
                 sh 'mvn clean install -Dmaven.test.failure.ignore=true'
             }
         }
