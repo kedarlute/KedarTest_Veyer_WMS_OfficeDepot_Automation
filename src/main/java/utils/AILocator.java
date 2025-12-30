@@ -1,3 +1,8 @@
+package utils;
+
+/**
+ * @author: Kedarnath Lute
+1. Primary locator first; 2. Alternate locators  */
 import org.openqa.selenium.By;
 import java.util.*;
 
