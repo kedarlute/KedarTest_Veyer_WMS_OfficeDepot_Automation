@@ -17,7 +17,7 @@ pipeline {
             ).trim().replace("\n", " ")
 
             def tests = sh(
-                script: "java TestSelector \"${files}\"",
+                script: "java AITestSelector \"${files}\"",
                 returnStdout: true
             ).trim()
 
