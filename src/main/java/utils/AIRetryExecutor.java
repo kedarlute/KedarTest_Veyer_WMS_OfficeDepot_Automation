@@ -1,3 +1,10 @@
+package utils;
+
+/**
+ * @author: Kedarnath Lute
+  -- Smart retries (only retry known flaky failures)
+ */
+
 public class AIRetryExecutor {
 
     private static final int MAX_RETRY = 2;
