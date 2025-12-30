@@ -1,4 +1,5 @@
-public class FlakyFailureAnalyzer {
+
+public class AIFlakyFailureAnalyzer {
 
     public static boolean isFlaky(Exception e) {
         String msg = e.getMessage().toLowerCase();
