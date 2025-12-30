@@ -26,10 +26,31 @@ public class LoginTest extends BaseTest {
         }
         
         @Test(priority = 0)
-        public void loginTest() {
-        driver.findElement(By.id("username")).sendKeys(Constants.UserName);
-        driver.findElement(By.id("password")).sendKeys(Constants.Password);
-        driver.findElement(By.id("loginBtn")).click();
+        public void login_with_AIFindElement() {
+
+       AIFindElement ai = new AIFindElement(driver);
+       AILocator usernameLocator = new AILocator(
+            By.id("username"),
+            List.of(
+                By.name("user"),
+                SemanticXPath.inputByLabel("Username")
+            )
+       );
+
+       AILocator passwordLocator = new AILocator(
+            By.id("password"),
+            List.of(
+                By.name("pass"),
+                SemanticXPath.inputByLabel("Password")
+            )
+      );
+
+      ai.find("username", usernameLocator).sendKeys("admin");
+      ai.find("password", passwordLocator).sendKeys("password123");
+
+   
+     
+       driver.findElement(By.id("loginBtn")).click();
 
         WebElement dashboard = driver.findElement(By.id("welcomeMsg"));
         Assert.assertTrue(dashboard.isDisplayed(), "Login failed!");
