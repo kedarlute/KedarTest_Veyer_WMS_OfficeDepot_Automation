@@ -1,4 +1,15 @@
-stage('Self Healing') {
+pipeline {
+    agent any
+
+    stages {
+        stage('Build and Run Initial Tests') {
+            steps {
+               
+                sh 'mvn clean install -Dmaven.test.failure.ignore=true'
+            }
+        }
+        
+   stage('Self Healing') {
     when {
         expression { currentBuild.currentResult == 'FAILURE' }
     }
@@ -22,4 +33,5 @@ stage('Self Healing') {
             }
         }
     }
+}
 }
