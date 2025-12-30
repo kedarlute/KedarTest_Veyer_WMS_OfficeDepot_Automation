@@ -7,7 +7,7 @@ package utils;
 import java.nio.file.*;
 import java.io.IOException;
 
-public class FailurePredictor {
+public class AIFailurePredictor {
 
     public static void main(String[] args) throws IOException {
         String logs = Files.readString(Path.of(args[0])).toLowerCase();
